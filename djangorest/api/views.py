@@ -5,7 +5,7 @@ from .models import Bucketlist
 
 # Create your views here.
 class CreateView(generics.ListCreateAPIView):
-    """defines create behavior of the api"""
+    """creates the bucketlist"""
     queryset = Bucketlist.objects.all()
     serializer_class = BucketlistSerializer
 

@@ -38,14 +38,15 @@ class ViewTestCase(TestCase):
         self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
 
-    def test_api_can_get_bucketlist(self):
-        bucketlist = Bucketlist.objects.all(id=1)
+    def test_api_can_get_a_bucketlist(self):
+        """Test the api can get a given bucketlist."""
+        bucketlist = Bucketlist.objects.get(id=1)
         response = self.client.get(
-            reverse('details', kwargs={'pk':bucketlist.id}),
-            format= "json"
-        )
+            '/bucketlists/',
+            kwargs={'pk': bucketlist.id}, format="json")
+
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertContains(bucketlist, response)
+        self.assertContains(response, bucketlist)
 
     def test_api_can_update_bucketlist(self):
         bucketlist = Bucketlist.objects.get()
